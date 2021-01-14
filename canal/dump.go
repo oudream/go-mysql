@@ -41,7 +41,7 @@ func (h *dumpParseHandler) Data(db string, table string, values []string) error 
 		return err
 	}
 
-	tableInfo, err := h.c.GetTable(db, table)
+	tableInfo, err := h.c.GetTable(db, table, true)
 	if err != nil {
 		e := errors.Cause(err)
 		if e == ErrExcludedTable ||

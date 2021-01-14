@@ -254,7 +254,7 @@ func (c *Canal) handleRowsEvent(e *replication.BinlogEvent) error {
 	schema := string(ev.Table.Schema)
 	table := string(ev.Table.Table)
 
-	t, err := c.GetTable(schema, table)
+	t, err := c.GetTable(schema, table, false)
 	if err != nil {
 		return err
 	}
