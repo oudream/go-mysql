@@ -7,8 +7,8 @@ import (
 	"fmt"
 
 	"github.com/pingcap/errors"
-	. "github.com/siddontang/go-mysql/mysql"
-	"github.com/siddontang/go-mysql/packet"
+	. "github.com/oudream/go-mysql/mysql"
+	"github.com/oudream/go-mysql/packet"
 )
 
 const defaultAuthPluginName = AUTH_NATIVE_PASSWORD
