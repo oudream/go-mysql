@@ -425,6 +425,7 @@ func (c *Canal) prepareSyncer() error {
 		SemiSyncEnabled:         c.cfg.SemiSyncEnabled,
 		MaxReconnectAttempts:    c.cfg.MaxReconnectAttempts,
 		DisableRetrySync:        c.cfg.DisableRetrySync,
+		DisableSyncTableInfo:    c.cfg.DisableSyncTableInfo,
 		TimestampStringLocation: c.cfg.TimestampStringLocation,
 		TLSConfig:               c.cfg.TLSConfig,
 	}

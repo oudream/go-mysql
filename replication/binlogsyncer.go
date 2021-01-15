@@ -90,6 +90,9 @@ type BinlogSyncerConfig struct {
 	// whether disable re-sync for broken connection
 	DisableRetrySync bool
 
+	// whether disable sync table info
+	DisableSyncTableInfo bool
+
 	// Only works when MySQL/MariaDB variable binlog_checksum=CRC32.
 	// For MySQL, binlog_checksum was introduced since 5.6.2, but CRC32 was set as default value since 5.6.6 .
 	// https://dev.mysql.com/doc/refman/5.6/en/replication-options-binary-log.html#option_mysqld_binlog-checksum

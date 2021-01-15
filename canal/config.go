@@ -84,6 +84,9 @@ type Config struct {
 	// whether disable re-sync for broken connection
 	DisableRetrySync bool `toml:"disable_retry_sync"`
 
+	// whether disable sync table info
+	DisableSyncTableInfo bool `toml:"disable_sync_table_info"`
+
 	// Set TLS config
 	TLSConfig *tls.Config
 }
