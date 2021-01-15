@@ -7,9 +7,9 @@ import (
 	"strings"
 	"time"
 
-	"github.com/pingcap/errors"
 	. "github.com/oudream/go-mysql/mysql"
 	"github.com/oudream/go-mysql/packet"
+	"github.com/pingcap/errors"
 )
 
 type Conn struct {

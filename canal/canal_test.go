@@ -129,19 +129,19 @@ func (s *canalTestSuite) TestCanal(c *C) {
 
 func (s *canalTestSuite) TestCanalFilter(c *C) {
 	// included
-	sch, err := s.c.GetTable("test", "canal_test", true)
+	sch, err := s.c.GetTable("test", "canal_test")
 	c.Assert(err, IsNil)
 	c.Assert(sch, NotNil)
-	_, err = s.c.GetTable("not_exist_db", "canal_test", true)
+	_, err = s.c.GetTable("not_exist_db", "canal_test")
 	c.Assert(errors.Trace(err), Not(Equals), ErrExcludedTable)
 	// excluded
-	sch, err = s.c.GetTable("test", "canal_test_inner", true)
+	sch, err = s.c.GetTable("test", "canal_test_inner")
 	c.Assert(errors.Cause(err), Equals, ErrExcludedTable)
 	c.Assert(sch, IsNil)
-	sch, err = s.c.GetTable("mysql", "canal_test", true)
+	sch, err = s.c.GetTable("mysql", "canal_test")
 	c.Assert(errors.Cause(err), Equals, ErrExcludedTable)
 	c.Assert(sch, IsNil)
-	sch, err = s.c.GetTable("not_exist_db", "not_canal_test", true)
+	sch, err = s.c.GetTable("not_exist_db", "not_canal_test")
 	c.Assert(errors.Cause(err), Equals, ErrExcludedTable)
 	c.Assert(sch, IsNil)
 }

@@ -7,8 +7,8 @@ import (
 	"path"
 	"time"
 
-	"github.com/pingcap/errors"
 	. "github.com/oudream/go-mysql/mysql"
+	"github.com/pingcap/errors"
 )
 
 // StartBackup: Like mysqlbinlog remote raw backup

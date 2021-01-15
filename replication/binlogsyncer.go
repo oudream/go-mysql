@@ -10,11 +10,11 @@ import (
 	"sync"
 	"time"
 
+	"github.com/oudream/go-mysql/client"
+	. "github.com/oudream/go-mysql/mysql"
 	"github.com/pingcap/errors"
 	uuid "github.com/satori/go.uuid"
 	"github.com/siddontang/go-log/log"
-	"github.com/oudream/go-mysql/client"
-	. "github.com/oudream/go-mysql/mysql"
 )
 
 var (

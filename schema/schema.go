@@ -10,8 +10,8 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/pingcap/errors"
 	"github.com/oudream/go-mysql/mysql"
+	"github.com/pingcap/errors"
 )
 
 var ErrTableNotExist = errors.New("table is not exist")

@@ -7,11 +7,11 @@ import (
 	"strings"
 	"time"
 
+	"github.com/oudream/go-mysql/mysql"
+	"github.com/oudream/go-mysql/schema"
 	"github.com/pingcap/errors"
 	"github.com/shopspring/decimal"
 	"github.com/siddontang/go-log/log"
-	"github.com/oudream/go-mysql/mysql"
-	"github.com/oudream/go-mysql/schema"
 )
 
 type dumpParseHandler struct {
@@ -41,7 +41,7 @@ func (h *dumpParseHandler) Data(db string, table string, values []string) error 
 		return err
 	}
 
-	tableInfo, err := h.c.GetTable(db, table, true)
+	tableInfo, err := h.c.GetTable(db, table)
 	if err != nil {
 		e := errors.Cause(err)
 		if e == ErrExcludedTable ||

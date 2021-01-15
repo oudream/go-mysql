@@ -5,8 +5,8 @@ import (
 	"crypto/tls"
 	"encoding/binary"
 
-	"github.com/pingcap/errors"
 	. "github.com/oudream/go-mysql/mysql"
+	"github.com/pingcap/errors"
 )
 
 func (c *Conn) readHandshakeResponse() error {
