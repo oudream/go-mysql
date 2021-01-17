@@ -335,8 +335,14 @@ func (c *Canal) GetTable(db string, table string) (*schema.Table, error) {
 	}
 	if err != nil {
 		// check table not exists
-		if ok, err1 := schema.IsTableExist(c, db, table); err1 == nil && !ok {
-			return nil, schema.ErrTableNotExist
+		if c.sqlDB == nil {
+			if ok, err1 := schema.IsTableExist(c, db, table); err1 == nil && !ok {
+				return nil, schema.ErrTableNotExist
+			}
+		} else {
+			if ok, err1 := schema.IsTableExistSqlDB(c.sqlDB, db, table); err1 == nil && !ok {
+				return nil, schema.ErrTableNotExist
+			}
 		}
 		// work around : RDS HAHeartBeat
 		// ref : https://github.com/alibaba/canal/blob/master/parse/src/main/java/com/alibaba/otter/canal/parse/inbound/mysql/dbsync/LogEventConvert.java#L385

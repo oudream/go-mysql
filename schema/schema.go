@@ -219,6 +219,16 @@ func IsTableExist(conn mysql.Executer, schema string, name string) (bool, error)
 	return r.RowNumber() == 1, nil
 }
 
+func IsTableExistSqlDB(conn *sql.DB, schema string, name string) (bool, error) {
+	query := fmt.Sprintf("SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = '%s' and TABLE_NAME = '%s' LIMIT 1", schema, name)
+	r, err := conn.Query(query)
+	if err != nil {
+		return false, errors.Trace(err)
+	}
+
+	return r.Next(), nil
+}
+
 func NewTableFromSqlDB(conn *sql.DB, schema string, name string) (*Table, error) {
 	ta := &Table{
 		Schema:  schema,
