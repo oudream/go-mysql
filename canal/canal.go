@@ -122,7 +122,7 @@ func NewCanal(cfg *Config) (*Canal, error) {
 	return c, nil
 }
 
-func (c *Canal) setDB(db *sql.DB) {
+func (c *Canal) SetSqlDB(db *sql.DB) {
 	c.sqlDB = db
 }
 
