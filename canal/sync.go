@@ -251,23 +251,12 @@ func (c *Canal) handleRowsEvent(e *replication.BinlogEvent) error {
 	ev := e.Event.(*replication.RowsEvent)
 
 	// Caveat: table may be altered at runtime.
-	dbName := string(ev.Table.Schema)
-	tableName := string(ev.Table.Table)
+	schema := string(ev.Table.Schema)
+	table := string(ev.Table.Table)
 
-	var t *schema.Table
-	if c.cfg.DisableSyncTableInfo {
-		t = &schema.Table{
-			Schema:  dbName,
-			Name:    tableName,
-			Columns: nil,
-			Indexes: nil,
-		}
-	} else {
-		var err error
-		t, err = c.GetTable(dbName, tableName)
-		if err != nil {
-			return err
-		}
+	t, err := c.GetTable(schema, table)
+	if err != nil {
+		return err
 	}
 	var action string
 	switch e.Header.EventType {

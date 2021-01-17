@@ -2,6 +2,7 @@ package canal
 
 import (
 	"context"
+	"database/sql"
 	"fmt"
 	"io/ioutil"
 	"os"
@@ -40,6 +41,7 @@ type Canal struct {
 
 	connLock sync.Mutex
 	conn     *client.Conn
+	sqlDB *sql.DB
 
 	tableLock          sync.RWMutex
 	tables             map[string]*schema.Table
@@ -118,6 +120,10 @@ func NewCanal(cfg *Config) (*Canal, error) {
 	}
 
 	return c, nil
+}
+
+func (c *Canal) setDB(db *sql.DB) {
+	c.sqlDB = db
 }
 
 func (c *Canal) prepareDumper() error {
@@ -321,7 +327,12 @@ func (c *Canal) GetTable(db string, table string) (*schema.Table, error) {
 		}
 	}
 
-	t, err := schema.NewTable(c, db, table)
+	var err error
+	if c.sqlDB == nil {
+		t, err = schema.NewTable(c, db, table)
+	} else {
+		t, err = schema.NewTableFromSqlDB(c.sqlDB, db, table)
+	}
 	if err != nil {
 		// check table not exists
 		if ok, err1 := schema.IsTableExist(c, db, table); err1 == nil && !ok {
@@ -425,7 +436,6 @@ func (c *Canal) prepareSyncer() error {
 		SemiSyncEnabled:         c.cfg.SemiSyncEnabled,
 		MaxReconnectAttempts:    c.cfg.MaxReconnectAttempts,
 		DisableRetrySync:        c.cfg.DisableRetrySync,
-		DisableSyncTableInfo:    c.cfg.DisableSyncTableInfo,
 		TimestampStringLocation: c.cfg.TimestampStringLocation,
 		TLSConfig:               c.cfg.TLSConfig,
 	}
